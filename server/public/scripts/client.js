@@ -4,7 +4,6 @@ function onReady(){
     $( '#calculateButton' ).on( 'click', equation );
     $( '#clearButton' ).on( 'click', clear );
     getHistory();
-    getSolution();
 }
 
 let symbol = '';
@@ -16,7 +15,9 @@ function getSolution(){
         url: '/calculator'
     }).then( function( response ){
         console.log('back from solution GET', response);
-        console.log('response solution:', response);
+        const el = $( '#output' );
+        el.empty();
+        el.append('Solution: ', String( response.solution ) );
     }).catch( function( err ){
         console.log( err );
         alert( 'nope in solution' );
